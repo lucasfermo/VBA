@@ -1,0 +1,59 @@
+Attribute VB_Name = "Module1"
+Sub DownToLast()
+Attribute DownToLast.VB_ProcData.VB_Invoke_Func = "q\n14"
+    finalcol = Cells(Rows.Count, 1).End(xlUp).Row
+    finalrow = Cells(1, Columns.Count).End(xlToLeft)
+    
+    currentcol = Selection.Column
+    currentrow = Selection.Row
+    
+    
+    For i = currentrow To 1 Step -1
+        If Not IsEmpty(Cells(currentrow, i)) Then
+            lastcol = i
+            Exit For
+    
+        End If
+    Next i
+    finalrow = Cells(Rows.Count, lastcol).End(xlUp).Row
+    
+    Cells(finalrow, currentcol).Select
+    
+End Sub
+Sub RightToLast()
+Attribute RightToLast.VB_ProcData.VB_Invoke_Func = "w\n14"
+    currentcol = Selection.Column
+    currentrow = Selection.Row
+    
+    finalcol = Cells(1, Columns.Count).End(xlToLeft).Column
+    
+    Cells(currentrow, finalcol).Select
+    
+End Sub
+
+Sub FillUpwards()
+Attribute FillUpwards.VB_ProcData.VB_Invoke_Func = "u\n14"
+    Dim rng As Object
+    
+    currentrow = Selection.Row
+    currentcol = Selection.Column
+    
+    uprow = Selection.End(xlUp).Select
+    
+    
+    Set rng = Range(Cells(Selection.Row, currentcol), _
+        Cells(currentrow, currentcol))
+    
+    Selection.AutoFill Destination:=rng
+    
+    Cells(currentrow, currentcol).Select
+
+End Sub
+
+
+
+
+
+
+
+
